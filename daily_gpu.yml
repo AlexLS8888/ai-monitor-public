@@ -1,0 +1,60 @@
+name: Daily GPU Collection
+
+on:
+  schedule:
+    - cron: '0 8 * * *'   # 08:00 UTC — 10h Paris été / 09h hiver
+  workflow_dispatch:       # déclenchement manuel depuis l'UI GitHub
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - run: pip install requests beautifulsoup4
+
+      - name: Collect GPU (RunPod + Vast.ai) + compute 7d metrics
+        env:
+          RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
+          VAST_API_KEY:   ${{ secrets.VAST_API_KEY }}
+        run: |
+          python ai_monitor_collector.py --collect-gpu
+          python ai_monitor_collector.py --export
+
+      # ── Commit DB + exports to private repo ─────────────────────────
+      - name: Commit to private repo
+        run: |
+          git config user.name  "AI Monitor Bot"
+          git config user.email "bot@ai-monitor"
+          git add data/ai_monitor.db exports/
+          git diff --cached --quiet || git commit -m "data: GPU $(date -u +%Y-%m-%d)"
+          git push
+
+      # ── Push only CSVs to public repo (no DB, no secrets, no code) ──
+      # Requires secret: PUBLIC_REPO_TOKEN (GitHub PAT, scope: repo)
+      # Requires secret: PUBLIC_REPO_NAME  (e.g. "alexandre/ai-monitor-public")
+      - name: Push GPU CSVs to public repo
+        env:
+          PUBLIC_REPO_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          PUBLIC_REPO_NAME:  ${{ secrets.PUBLIC_REPO_NAME }}
+        run: |
+          git clone https://x-access-token:${PUBLIC_REPO_TOKEN}@github.com/${PUBLIC_REPO_NAME}.git /tmp/pub
+          cp exports/gpu_utilisation.csv    /tmp/pub/dashboard/data/ 2>/dev/null || true
+          cp exports/gpu_spot_market.csv    /tmp/pub/dashboard/data/ 2>/dev/null || true
+          cp exports/gpu_weekly_metrics.csv /tmp/pub/dashboard/data/ 2>/dev/null || true
+          cd /tmp/pub
+          git config user.name "AI Monitor Bot"
+          git config user.email "bot@ai-monitor"
+          git add dashboard/data/
+          git diff --cached --quiet || git commit -m "data: GPU $(date -u +%Y-%m-%d)"
+          git push

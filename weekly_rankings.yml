@@ -1,0 +1,68 @@
+name: Weekly Rankings Collection
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'   # Lundi 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - run: pip install requests beautifulsoup4
+
+      - name: Collect OpenRouter rankings (127 weeks historical)
+        run: |
+          python ai_monitor_collector.py --collect-rankings
+          python ai_monitor_collector.py --export
+
+      # ── Commit to private repo ───────────────────────────────────────
+      - name: Commit to private repo
+        run: |
+          git config user.name  "AI Monitor Bot"
+          git config user.email "bot@ai-monitor"
+          git add data/ai_monitor.db exports/
+          git diff --cached --quiet || git commit -m "data: Rankings $(date -u +%Y-%m-%d)"
+          git push
+
+      # ── Push all CSVs to public repo ─────────────────────────────────
+      - name: Push all CSVs to public repo
+        env:
+          PUBLIC_REPO_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          PUBLIC_REPO_NAME:  ${{ secrets.PUBLIC_REPO_NAME }}
+        run: |
+          git clone https://x-access-token:${PUBLIC_REPO_TOKEN}@github.com/${PUBLIC_REPO_NAME}.git /tmp/pub
+
+          # Copy ALL exports (GPU + Rankings) for a full dashboard refresh
+          cp exports/gpu_utilisation.csv          /tmp/pub/dashboard/data/ 2>/dev/null || true
+          cp exports/gpu_spot_market.csv          /tmp/pub/dashboard/data/ 2>/dev/null || true
+          cp exports/gpu_weekly_metrics.csv       /tmp/pub/dashboard/data/ 2>/dev/null || true
+          cp exports/llm_weekly_metrics.csv       /tmp/pub/dashboard/data/ 2>/dev/null || true
+          cp exports/provider_share_history.csv   /tmp/pub/dashboard/data/ 2>/dev/null || true
+          # Wildcard for models_YYYY-WXX.csv and apps_YYYY-WXX.csv
+          cp exports/models_*.csv                 /tmp/pub/dashboard/data/ 2>/dev/null || true
+          cp exports/apps_*.csv                   /tmp/pub/dashboard/data/ 2>/dev/null || true
+
+          cd /tmp/pub
+          git config user.name "AI Monitor Bot"
+          git config user.email "bot@ai-monitor"
+          git add dashboard/data/
+          git diff --cached --quiet || git commit -m "data: Weekly rankings $(date -u +%Y-%m-%d)"
+          git push
+
+      # ── Audit log ───────────────────────────────────────────────────
+      - name: Audit DB (logged in Actions)
+        if: always()
+        run: python ai_monitor_collector.py --audit
