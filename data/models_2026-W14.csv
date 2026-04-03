@@ -1,0 +1,12 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+34,2026-03-30,2026-04-03T03:01:20.549767,1,labs/fusion,Fusion,labs,4790000000000,1,0
+35,2026-03-30,2026-04-03T03:01:20.549767,2,xiaomi/mimo-v2-pro-20260318,Mimo V2 Pro,xiaomi,4790000000000,1,1
+36,2026-03-30,2026-04-03T03:01:20.549767,3,qwen/qwen3.6-plus-preview:free,Qwen3.6 Plus Preview (free),qwen,1640000000000,1,1
+37,2026-03-30,2026-04-03T03:01:20.549767,4,stepfun/step-3.5-flash:free,Step 3.5 Flash (free),stepfun,1380000000000,1,1
+38,2026-03-30,2026-04-03T03:01:20.549767,5,minimax/minimax-m2.7-20260318,Minimax M2.7,minimax,1340000000000,1,1
+39,2026-03-30,2026-04-03T03:01:20.549767,6,deepseek/deepseek-v3.2-20251201,Deepseek V3.2,deepseek,1210000000000,1,1
+40,2026-03-30,2026-04-03T03:01:20.549767,7,anthropic/claude-4.6-opus-20260205,Claude Opus 4.6,anthropic,1020000000000,0,0
+41,2026-03-30,2026-04-03T03:01:20.549767,8,anthropic/claude-4.6-sonnet-20260217,Claude Sonnet 4.6,anthropic,1010000000000,0,0
+42,2026-03-30,2026-04-03T03:01:20.549767,9,google/gemini-3-flash-preview-20251217,Gemini 3 Flash Preview,google,979000000000,0,0
+43,2026-03-30,2026-04-03T03:01:20.549767,10,z-ai/glm-5-turbo-20260315,GLM 5 Turbo,z-ai,900000000000,1,0
+44,2026-03-30,2026-04-03T03:01:20.549767,11,x-ai/grok-4.1-fast,Grok 4.1 Fast,x-ai,820000000000,0,0
