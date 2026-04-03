@@ -1,11 +1,11 @@
 id,week_date,scraped_at,rank,app_url,app_name,token_count
-61,2026-03-30,2026-04-03T17:12:45.054181,1,https://openclaw.ai/,OpenClaw,822000000000
-62,2026-03-30,2026-04-03T17:12:45.054181,2,https://kilocode.ai/,Kilo Code,302000000000
-63,2026-03-30,2026-04-03T17:12:45.054181,3,https://claude.ai/,Claude Code,166000000000
-64,2026-03-30,2026-04-03T17:12:45.054181,4,https://cline.bot/,Cline,97200000000
-65,2026-03-30,2026-04-03T17:12:45.054181,5,https://hermes-agent.nousresearch.com/,Hermes Agent,64000000000
-66,2026-03-30,2026-04-03T17:12:45.054181,6,https://descript.com/,Descript,41400000000
-67,2026-03-30,2026-04-03T17:12:45.054181,7,https://www.isekai.world/,ISEKAI ZERO,27300000000
-68,2026-03-30,2026-04-03T17:12:45.054181,8,https://janitorai.com/,Janitor AI,26000000000
-69,2026-03-30,2026-04-03T17:12:45.054181,9,https://github.com/RooVetGit/Roo-Cline,Roo Code,20900000000
-70,2026-03-30,2026-04-03T17:12:45.054181,10,https://lemonade.gg/,Lemonade,9640000000
+71,2026-03-30,2026-04-03T17:37:48.348205,1,https://openclaw.ai/,OpenClaw,822000000000
+72,2026-03-30,2026-04-03T17:37:48.348205,2,https://kilocode.ai/,Kilo Code,302000000000
+73,2026-03-30,2026-04-03T17:37:48.348205,3,https://claude.ai/,Claude Code,166000000000
+74,2026-03-30,2026-04-03T17:37:48.348205,4,https://cline.bot/,Cline,97200000000
+75,2026-03-30,2026-04-03T17:37:48.348205,5,https://hermes-agent.nousresearch.com/,Hermes Agent,64000000000
+76,2026-03-30,2026-04-03T17:37:48.348205,6,https://descript.com/,Descript,41400000000
+77,2026-03-30,2026-04-03T17:37:48.348205,7,https://www.isekai.world/,ISEKAI ZERO,27300000000
+78,2026-03-30,2026-04-03T17:37:48.348205,8,https://janitorai.com/,Janitor AI,26000000000
+79,2026-03-30,2026-04-03T17:37:48.348205,9,https://github.com/RooVetGit/Roo-Cline,Roo Code,20900000000
+80,2026-03-30,2026-04-03T17:37:48.348205,10,https://lemonade.gg/,Lemonade,9640000000

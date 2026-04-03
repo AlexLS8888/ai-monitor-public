@@ -1,0 +1,2 @@
+week_date,scraped_at,total_tokens,open_source_pct,chinese_pct,proprietary_pct,top1_model_id,top1_tokens,top_provider,n_models_tracked
+2026-03-30,2026-04-03T17:37:48.348205,19879000000000,80.74,52.12,19.26,labs/fusion,4790000000000,labs,11
