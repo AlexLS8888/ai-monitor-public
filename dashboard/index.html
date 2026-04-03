@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Thematic Monitor</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #F5F4F1; --bg1: #FFFFFF; --bg2: #F0EEE9;
+  --rule:  #E0DDD6; --rule2: #C8C4BB;
+  --ink:   #1A1917; --ink2: #3D3A34; --ink3: #7A756A; --ink4: #B0A99E;
+  --gold:  #8B6914; --gold-bg: #FBF6EB;
+  --sage:  #2E6651; --sage-bg: #EBF3EF;
+  --umber: #8B2E2E; --umber-bg: #F3EBEB;
+  --sand:  #7A5A2A; --sand-bg: #F5F0E8;
+  --c1: #4A7FA5; --c2: #8B6914; --c3: #8B5A42;
+  --c4: #2E6651; --c5: #6B5A7A; --c6: #5A7A5A;
+  --ff: 'Figtree', -apple-system, sans-serif;
+  --mono: 'Roboto Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink2);font-family:var(--ff);font-size:13px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--rule2);}
+
+/* ── HEADER */
+.header{background:var(--bg1);border-bottom:1px solid var(--rule);padding:0 40px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.header-brand{font-size:14px;font-weight:600;color:var(--ink);letter-spacing:-0.01em;}
+.header-brand span{color:var(--gold);}
+.header-right{display:flex;gap:20px;align-items:center;}
+.status-dot{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.1em;}
+.dot{width:5px;height:5px;border-radius:50%;}
+.dot-live{background:var(--sage);}
+.dot-stale{background:var(--sand);}
+.dot-err{background:var(--umber);}
+#last-update{font-family:var(--mono);font-size:8px;color:var(--ink4);}
+
+/* ── TABS */
+.tab-bar{background:var(--bg1);border-bottom:1px solid var(--rule);padding:0 40px;display:flex;position:sticky;top:52px;z-index:190;}
+.tab-btn{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.12em;padding:12px 18px 11px;cursor:pointer;color:var(--ink4);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;}
+.tab-btn:hover{color:var(--ink3);}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* ── LAYOUT */
+.main{padding:24px 40px 48px;max-width:1540px;margin:0 auto;}
+.section-label{display:flex;align-items:center;gap:14px;margin:28px 0 14px;}
+.section-label::before{content:'';display:block;width:2px;height:10px;background:var(--gold);flex-shrink:0;}
+.section-label-text{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.18em;color:var(--ink4);}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule);}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px;}
+
+/* ── CARDS */
+.card{background:var(--bg1);border:1px solid var(--rule);padding:18px 20px;}
+.card-title{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.15em;color:var(--ink4);margin-bottom:3px;}
+.card-sub{font-size:10px;color:var(--ink4);margin-bottom:14px;}
+
+/* ── KPI TILES */
+.kpi-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-bottom:14px;background:var(--rule);}
+.kpi{background:var(--bg1);padding:16px 18px;position:relative;border-bottom:2px solid transparent;}
+.kpi.bull{border-bottom-color:var(--sage);}
+.kpi.bear{border-bottom-color:var(--umber);}
+.kpi.neut{border-bottom-color:var(--sand);}
+.kpi-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink4);margin-bottom:8px;}
+.kpi-value{font-family:var(--mono);font-size:22px;font-weight:300;color:var(--ink);line-height:1;margin-bottom:5px;letter-spacing:-0.02em;}
+.kpi-delta{font-family:var(--mono);font-size:9px;}
+.kpi-delta.up{color:var(--sage);}
+.kpi-delta.dn{color:var(--umber);}
+.kpi-delta.nu{color:var(--ink4);}
+
+/* ── GPU SIGNAL CARDS */
+.gpu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:14px;background:var(--rule);}
+.gpu-card{background:var(--bg1);padding:18px;}
+.gpu-card-name{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink3);margin-bottom:8px;}
+.gpu-score{font-family:var(--mono);font-size:32px;font-weight:300;line-height:1;letter-spacing:-0.03em;}
+.gpu-score.bull{color:var(--sage);}
+.gpu-score.neut{color:var(--sand);}
+.gpu-score.bear{color:var(--umber);}
+.gpu-signal{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.15em;margin-top:4px;margin-bottom:12px;}
+.gpu-signal.bull{color:var(--sage);}
+.gpu-signal.neut{color:var(--sand);}
+.gpu-signal.bear{color:var(--umber);}
+.gpu-rows{border-top:1px solid var(--rule);padding-top:10px;margin-top:6px;}
+.gpu-row{display:flex;justify-content:space-between;padding:3px 0;}
+.gpu-row-label{font-size:10px;color:var(--ink3);}
+.gpu-row-val{font-family:var(--mono);font-size:9px;color:var(--ink2);}
+
+/* ── TABLES */
+.data-table{width:100%;border-collapse:collapse;margin-top:10px;}
+.data-table th{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink4);text-align:left;padding:7px 10px;border-bottom:1px solid var(--rule);background:var(--bg2);}
+.data-table td{font-size:11px;color:var(--ink2);padding:7px 10px;border-bottom:1px solid var(--rule);}
+.data-table tbody tr:hover td{background:var(--bg2);}
+.mono{font-family:var(--mono);font-size:10px;}
+.badge{display:inline-block;padding:1px 6px;font-family:var(--mono);font-size:8px;border:1px solid;text-transform:uppercase;letter-spacing:0.08em;}
+.badge-oss{border-color:var(--sage);color:var(--sage);}
+.badge-cn{border-color:var(--sand);color:var(--sand);}
+.badge-prop{border-color:var(--ink4);color:var(--ink4);}
+
+/* ── LOADING */
+.loading{display:flex;align-items:center;justify-content:center;height:120px;font-family:var(--mono);font-size:10px;color:var(--ink4);letter-spacing:0.1em;}
+.error-msg{padding:12px;background:var(--umber-bg);border-left:2px solid var(--umber);font-size:11px;color:var(--umber);margin:10px 0;}
+
+/* ── FOOTER */
+.footer{margin-top:36px;padding:14px 0;border-top:1px solid var(--rule);font-family:var(--mono);font-size:8px;color:var(--ink4);text-align:center;letter-spacing:0.1em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div style="display:flex;align-items:center;gap:20px;">
+    <div class="header-brand">AI <span>Thematic</span> Monitor</div>
+    <div style="width:1px;height:12px;background:var(--rule2)"></div>
+    <div style="font-family:var(--mono);font-size:9px;color:var(--ink4);text-transform:uppercase;letter-spacing:0.12em;">Institutional Research · Auto-updated</div>
+  </div>
+  <div class="header-right">
+    <div class="status-dot" id="gpu-status"><div class="dot dot-stale"></div>GPU</div>
+    <div class="status-dot" id="llm-status"><div class="dot dot-stale"></div>LLM</div>
+    <div id="last-update">Loading...</div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('gpu')">GPU Demand</button>
+  <button class="tab-btn" onclick="switchTab('llm')">LLM Rankings</button>
+  <button class="tab-btn" onclick="switchTab('providers')">Market Share</button>
+  <button class="tab-btn" onclick="switchTab('apps')">App Rankings</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 1: GPU DEMAND
+═══════════════════════════════════════════════ -->
+<div id="tab-gpu" class="tab-content active">
+<div class="main">
+
+  <div class="section-label"><span class="section-label-text">GPU Demand Signals — Rolling 7d</span></div>
+  <div id="gpu-signals" class="gpu-grid">
+    <div class="loading">Loading GPU data...</div>
+  </div>
+
+  <div class="section-label"><span class="section-label-text">RunPod Utilisation History</span></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">B200 Utilisation Rate</div>
+      <div class="card-sub">rentedCount / totalCount — RunPod Secure Cloud fleet</div>
+      <canvas id="b200Chart" height="180"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title">H100 SXM Utilisation Rate</div>
+      <div class="card-sub">rentedCount / totalCount — RunPod fleet</div>
+      <canvas id="h100Chart" height="180"></canvas>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="section-label-text">H100 Spot Market — Vast.ai</span></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">H100 Spot Listing Count</div>
+      <div class="card-sub">Inverse signal: low count = tight demand = bullish</div>
+      <canvas id="h100CountChart" height="180"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title">H100 Median Spot Price ($/hr)</div>
+      <div class="card-sub">p50 across verified Vast.ai listings / GPU</div>
+      <canvas id="h100PriceChart" height="180"></canvas>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 2: LLM RANKINGS
+═══════════════════════════════════════════════ -->
+<div id="tab-llm" class="tab-content">
+<div class="main">
+
+  <div class="section-label"><span class="section-label-text">LLM Weekly Metrics — OSS vs Proprietary</span></div>
+  <div class="kpi-strip" id="llm-kpis">
+    <div class="loading">Loading...</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">OSS vs Proprietary Token Share</div>
+      <div class="card-sub">Weekly % — OpenRouter platform</div>
+      <canvas id="ossChart" height="200"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title">Chinese OSS Share</div>
+      <div class="card-sub">DeepSeek, Qwen, MiniMax, Kimi, Xiaomi % of total</div>
+      <canvas id="cnChart" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="section-label-text">Top Models This Week</span></div>
+  <div class="card">
+    <table class="data-table" id="models-table">
+      <thead><tr><th>Rk</th><th>Model</th><th>Provider</th><th>Tokens</th><th>Type</th></tr></thead>
+      <tbody><tr><td colspan="5" class="loading">Loading...</td></tr></tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 3: PROVIDER MARKET SHARE
+═══════════════════════════════════════════════ -->
+<div id="tab-providers" class="tab-content">
+<div class="main">
+
+  <div class="section-label"><span class="section-label-text">Provider Market Share — Latest Week</span></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Token Share by Provider</div>
+      <canvas id="provChart" height="280"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title">Provider Share History</div>
+      <div class="card-sub">Top 6 providers by weekly token volume</div>
+      <canvas id="provHistChart" height="280"></canvas>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 4: APP RANKINGS
+═══════════════════════════════════════════════ -->
+<div id="tab-apps" class="tab-content">
+<div class="main">
+
+  <div class="section-label"><span class="section-label-text">Top Apps & Agents — This Week</span></div>
+  <div class="card">
+    <table class="data-table" id="apps-table">
+      <thead><tr><th>Rk</th><th>App</th><th>Tokens</th><th>URL</th></tr></thead>
+      <tbody><tr><td colspan="4" class="loading">Loading...</td></tr></tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<div class="footer">
+  AI Thematic Monitor · Data: RunPod GraphQL + Vast.ai API + OpenRouter · Auto-updated via GitHub Actions
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// CONFIG — data files served from same origin (GitHub Pages)
+// ══════════════════════════════════════════════
+const DATA = {
+  gpu_util:    'data/gpu_utilisation.csv',
+  gpu_spot:    'data/gpu_spot_market.csv',
+  gpu_metrics: 'data/gpu_weekly_metrics.csv',
+  llm_metrics: 'data/llm_weekly_metrics.csv',
+  providers:   'data/provider_share_history.csv',
+  models:      null,   // set dynamically (models_YYYY-WXX.csv)
+  apps:        null,   // set dynamically
+};
+
+// ── Tab switching
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── CSV parser
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,''));
+  return lines.slice(1).map(line => {
+    const vals = line.split(',').map(v => v.trim().replace(/^"|"$/g,''));
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = vals[i] || '');
+    return obj;
+  }).filter(r => Object.values(r).some(v => v));
+}
+
+async function fetchCSV(path) {
+  try {
+    const r = await fetch(path + '?t=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    return parseCSV(await r.text());
+  } catch(e) {
+    console.warn('CSV fetch failed:', path, e);
+    return [];
+  }
+}
+
+// ── Format helpers
+function fmtTokens(n) {
+  if (!n) return '?';
+  n = +n;
+  if (n >= 1e12) return (n/1e12).toFixed(2) + 'T';
+  if (n >= 1e9)  return (n/1e9).toFixed(0) + 'B';
+  return n.toLocaleString();
+}
+function fmtPct(v) { return v ? (+v).toFixed(1) + '%' : '?'; }
+function fmtPrice(v) { return v ? '$' + (+v).toFixed(2) : '?'; }
+
+// ── Chart defaults
+Chart.defaults.color       = '#7A756A';
+Chart.defaults.font.family = "'Roboto Mono', monospace";
+Chart.defaults.font.size   = 9;
+const gridColor = 'rgba(0,0,0,0.05)';
+
+function lineChart(id, labels, datasets, opts={}) {
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: datasets.length > 1, labels: { boxWidth: 10, padding: 12 }}},
+      scales: {
+        x: { grid: { color: gridColor }, ticks: { maxTicksLimit: 8 }},
+        y: { grid: { color: gridColor }, ...opts.y }
+      }
+    }
+  });
+}
+
+function doughnutChart(id, labels, data, colors) {
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 1, borderColor: '#fff' }]},
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'right', labels: { boxWidth: 10, padding: 10, font: { size: 9 }}}}
+    }
+  });
+}
+
+// Signal color
+function signalClass(signal) {
+  if (!signal) return 'neut';
+  if (signal.includes('BULL')) return 'bull';
+  if (signal.includes('BEAR')) return 'bear';
+  return 'neut';
+}
+
+// ══════════════════════════════════════════════
+// GPU TAB
+// ══════════════════════════════════════════════
+async function loadGPU() {
+  const [metrics, util, spot] = await Promise.all([
+    fetchCSV(DATA.gpu_metrics),
+    fetchCSV(DATA.gpu_util),
+    fetchCSV(DATA.gpu_spot),
+  ]);
+
+  if (!metrics.length) {
+    document.getElementById('gpu-signals').innerHTML =
+      '<div class="error-msg" style="grid-column:1/-1">No GPU data yet. Run: python ai_monitor_collector.py --collect-gpu</div>';
+    return;
+  }
+
+  // Status dot
+  const latestDate = metrics.reduce((a,b) => a.as_of_date > b.as_of_date ? a : b).as_of_date;
+  const daysDiff = Math.floor((Date.now() - new Date(latestDate))/(1000*60*60*24));
+  const gpuDot = document.querySelector('#gpu-status .dot');
+  gpuDot.className = 'dot ' + (daysDiff <= 1 ? 'dot-live' : daysDiff <= 3 ? 'dot-stale' : 'dot-err');
+  document.getElementById('last-update').textContent = 'GPU: ' + latestDate;
+
+  // Signal cards
+  const latest = metrics.filter(r => r.as_of_date === latestDate);
+  const GPU_PRIORITY = ['B200','H100_SXM','H200_SXM','A100_SXM','H100_PCIE'];
+  const ordered = GPU_PRIORITY.map(g => latest.find(r => r.gpu_model === g)).filter(Boolean);
+
+  document.getElementById('gpu-signals').innerHTML = ordered.map(r => {
+    const sc = signalClass(r.signal);
+    const rp  = r.avg_rental_pct_7d ? (+r.avg_rental_pct_7d).toFixed(1) + '%' : '—';
+    const cnt = r.avg_spot_count_7d  ? Math.round(+r.avg_spot_count_7d) : '—';
+    const p50 = r.avg_spot_p50_7d   ? '$' + (+r.avg_spot_p50_7d).toFixed(2) : '—';
+    const wow = r.spot_price_wow_pct ? (r.spot_price_wow_pct > 0 ? '+' : '') + (+r.spot_price_wow_pct).toFixed(1) + '%' : '—';
+    return `<div class="gpu-card">
+      <div class="gpu-card-name">${r.gpu_model}</div>
+      <div class="gpu-score ${sc}">${r.demand_score ? (+r.demand_score).toFixed(1) : '—'}</div>
+      <div class="gpu-signal ${sc}">${r.signal || '—'}</div>
+      <div class="gpu-rows">
+        <div class="gpu-row"><span class="gpu-row-label">RunPod util 7d</span><span class="gpu-row-val">${rp}</span></div>
+        <div class="gpu-row"><span class="gpu-row-label">Vast.ai listings</span><span class="gpu-row-val">${cnt}</span></div>
+        <div class="gpu-row"><span class="gpu-row-label">Spot p50</span><span class="gpu-row-val">${p50}</span></div>
+        <div class="gpu-row"><span class="gpu-row-label">Price WoW</span><span class="gpu-row-val">${wow}</span></div>
+      </div>
+    </div>`;
+  }).join('') || '<div class="loading">No signal data</div>';
+
+  // B200 utilisation chart
+  const b200 = util.filter(r => r.gpu_model === 'B200').sort((a,b) => a.date.localeCompare(b.date));
+  if (b200.length) lineChart('b200Chart',
+    b200.map(r => r.date),
+    [{ label: 'B200 util%', data: b200.map(r => r.rental_pct), borderColor: '#8B6914',
+       backgroundColor: 'rgba(139,105,20,0.08)', tension: 0.3, pointRadius: 2 }],
+    { y: { min: 0, max: 100, ticks: { callback: v => v + '%' }}}
+  );
+
+  // H100 utilisation chart
+  const h100u = util.filter(r => r.gpu_model === 'H100_SXM').sort((a,b) => a.date.localeCompare(b.date));
+  if (h100u.length) lineChart('h100Chart',
+    h100u.map(r => r.date),
+    [{ label: 'H100 util%', data: h100u.map(r => r.rental_pct), borderColor: '#4A7FA5',
+       backgroundColor: 'rgba(74,127,165,0.08)', tension: 0.3, pointRadius: 2 }],
+    { y: { min: 0, max: 100, ticks: { callback: v => v + '%' }}}
+  );
+
+  // H100 spot count
+  const h100s = spot.filter(r => r.gpu_model === 'H100_SXM').sort((a,b) => a.date.localeCompare(b.date));
+  if (h100s.length) lineChart('h100CountChart',
+    h100s.map(r => r.date),
+    [{ label: 'H100 listings', data: h100s.map(r => r.n_listings), borderColor: '#6B5A7A',
+       backgroundColor: 'rgba(107,90,122,0.08)', tension: 0.3, pointRadius: 2 }]
+  );
+
+  // H100 spot price
+  if (h100s.length) lineChart('h100PriceChart',
+    h100s.map(r => r.date),
+    [
+      { label: 'p50', data: h100s.map(r => r.price_p50), borderColor: '#4A7FA5', tension: 0.3, pointRadius: 2 },
+      { label: 'p10', data: h100s.map(r => r.price_p10), borderColor: '#4A7FA5', borderDash: [4,3], tension: 0.3, pointRadius: 0 },
+    ],
+    { y: { ticks: { callback: v => '$' + v }}}
+  );
+}
+
+// ══════════════════════════════════════════════
+// LLM TAB
+// ══════════════════════════════════════════════
+async function loadLLM() {
+  const metrics = await fetchCSV(DATA.llm_metrics);
+  if (!metrics.length) return;
+
+  const latestRow = metrics.reduce((a,b) => a.week_date > b.week_date ? a : b);
+  const sorted    = metrics.sort((a,b) => a.week_date.localeCompare(b.week_date));
+
+  // Status
+  const llmDot = document.querySelector('#llm-status .dot');
+  const daysDiff = Math.floor((Date.now() - new Date(latestRow.week_date))/(1000*60*60*24));
+  llmDot.className = 'dot ' + (daysDiff <= 7 ? 'dot-live' : 'dot-stale');
+
+  // KPIs
+  const prev = metrics.filter(r => r.week_date < latestRow.week_date).pop();
+  function delta(cur, pre, key) {
+    if (!pre || !pre[key] || !cur[key]) return '';
+    const d = +cur[key] - +pre[key];
+    return `<span class="kpi-delta ${d>0?'up':'dn'}">${d>0?'↑':'↓'}${Math.abs(d).toFixed(1)}pp WoW</span>`;
+  }
+  document.getElementById('llm-kpis').innerHTML = `
+    <div class="kpi neut"><div class="kpi-label">Total Tokens</div><div class="kpi-value">${fmtTokens(latestRow.total_tokens)}</div><span class="kpi-delta nu">${latestRow.week_date}</span></div>
+    <div class="kpi ${+latestRow.open_source_pct>35?'bear':'bull'}"><div class="kpi-label">OSS Share</div><div class="kpi-value">${fmtPct(latestRow.open_source_pct)}</div>${delta(latestRow,prev,'open_source_pct')}</div>
+    <div class="kpi ${+latestRow.chinese_pct>20?'bear':'neut'}"><div class="kpi-label">Chinese OSS</div><div class="kpi-value">${fmtPct(latestRow.chinese_pct)}</div>${delta(latestRow,prev,'chinese_pct')}</div>
+    <div class="kpi bull"><div class="kpi-label">Proprietary</div><div class="kpi-value">${fmtPct(latestRow.proprietary_pct)}</div>${delta(latestRow,prev,'proprietary_pct')}</div>
+    <div class="kpi neut"><div class="kpi-label">Models Tracked</div><div class="kpi-value">${latestRow.n_models_tracked || '—'}</div><span class="kpi-delta nu">this week</span></div>
+  `;
+
+  const labels = sorted.map(r => r.week_date);
+  // OSS vs Prop chart
+  lineChart('ossChart', labels, [
+    { label: 'OSS %', data: sorted.map(r => r.open_source_pct),
+      borderColor: '#2E6651', backgroundColor: 'rgba(46,102,81,0.08)', tension: 0.3, pointRadius: 2 },
+    { label: 'Proprietary %', data: sorted.map(r => r.proprietary_pct),
+      borderColor: '#4A7FA5', backgroundColor: 'rgba(74,127,165,0.05)', tension: 0.3, pointRadius: 0 },
+  ], { y: { min: 0, max: 100, ticks: { callback: v => v + '%' }}});
+
+  // Chinese OSS
+  lineChart('cnChart', labels, [
+    { label: 'Chinese OSS %', data: sorted.map(r => r.chinese_pct),
+      borderColor: '#8B5A42', backgroundColor: 'rgba(139,90,66,0.08)', tension: 0.3, pointRadius: 2 }
+  ], { y: { min: 0, ticks: { callback: v => v + '%' }}});
+
+  // Models table — load latest week CSV
+  const weekLabel = latestRow.week_date.replace(/-/g,'').slice(0,7);
+  // find the file dynamically
+  const today = new Date();
+  const week = getWeekNumber(today);
+  const modelFile = `data/models_${today.getFullYear()}-W${String(week).padStart(2,'0')}.csv`;
+  const models = await fetchCSV(modelFile);
+
+  if (models.length) {
+    const tbody = document.querySelector('#models-table tbody');
+    tbody.innerHTML = models.slice(0,25).map(m => {
+      const badge = m.is_chinese=='1' ? '<span class="badge badge-cn">CN OSS</span>'
+                  : m.is_open_source=='1' ? '<span class="badge badge-oss">OSS</span>'
+                  : '<span class="badge badge-prop">Prop</span>';
+      return `<tr>
+        <td class="mono">${m.rank}</td>
+        <td>${m.model_name || m.model_id}</td>
+        <td class="mono">${m.provider}</td>
+        <td class="mono">${fmtTokens(m.token_count)}</td>
+        <td>${badge}</td>
+      </tr>`;
+    }).join('');
+  }
+}
+
+function getWeekNumber(d) {
+  const onejan = new Date(d.getFullYear(), 0, 1);
+  return Math.ceil((((d - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+}
+
+// ══════════════════════════════════════════════
+// PROVIDERS TAB
+// ══════════════════════════════════════════════
+async function loadProviders() {
+  const rows = await fetchCSV(DATA.providers);
+  if (!rows.length) return;
+
+  const COLORS = ['#4A7FA5','#8B6914','#8B5A42','#2E6651','#6B5A7A','#5A7A5A','#7A756A','#B0A99E'];
+
+  // Latest week doughnut
+  const latestWeek = rows.reduce((a,b) => a.week_date > b.week_date ? a : b).week_date;
+  const latestProv = rows.filter(r => r.week_date === latestWeek)
+                         .sort((a,b) => +b.token_count - +a.token_count).slice(0,8);
+
+  doughnutChart('provChart',
+    latestProv.map(r => r.provider),
+    latestProv.map(r => +r.token_share_pct),
+    COLORS
+  );
+
+  // History stacked area — top 6 providers
+  const weeks = [...new Set(rows.map(r => r.week_date))].sort();
+  const topProviders = latestProv.slice(0,6).map(r => r.provider);
+
+  lineChart('provHistChart', weeks,
+    topProviders.map((prov, i) => ({
+      label: prov,
+      data: weeks.map(w => {
+        const r = rows.find(r => r.week_date === w && r.provider === prov);
+        return r ? +r.token_share_pct : 0;
+      }),
+      borderColor: COLORS[i],
+      backgroundColor: COLORS[i] + '18',
+      tension: 0.3, pointRadius: 0,
+    })),
+    { y: { ticks: { callback: v => v + '%' }}}
+  );
+}
+
+// ══════════════════════════════════════════════
+// APPS TAB
+// ══════════════════════════════════════════════
+async function loadApps() {
+  const today = new Date();
+  const week  = getWeekNumber(today);
+  const appsFile = `data/apps_${today.getFullYear()}-W${String(week).padStart(2,'0')}.csv`;
+  const apps = await fetchCSV(appsFile);
+
+  if (!apps.length) {
+    document.querySelector('#apps-table tbody').innerHTML =
+      '<tr><td colspan="4" class="error-msg">No app data yet.</td></tr>';
+    return;
+  }
+
+  document.querySelector('#apps-table tbody').innerHTML = apps.map(a => `
+    <tr>
+      <td class="mono">${a.rank}</td>
+      <td>${a.app_name || '—'}</td>
+      <td class="mono">${fmtTokens(a.token_count)}</td>
+      <td><a href="${a.app_url}" target="_blank" style="color:var(--gold);font-family:var(--mono);font-size:9px;">${(a.app_url||'').replace('https://','').slice(0,40)}</a></td>
+    </tr>`).join('');
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+(async () => {
+  await Promise.all([loadGPU(), loadLLM(), loadProviders(), loadApps()]);
+  document.getElementById('last-update').textContent =
+    'Updated: ' + new Date().toLocaleTimeString();
+})();
+</script>
+</body>
+</html>
