@@ -1,0 +1,12 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+89,2026-04-06,2026-04-06T08:59:32.359887,1,labs/fusion,Fusion,labs,4600000000000,1,0
+90,2026-04-06,2026-04-06T08:59:32.359887,2,qwen/qwen3.6-plus-04-02:free,Qwen3.6 Plus (free),qwen,4600000000000,1,1
+91,2026-04-06,2026-04-06T08:59:32.359887,3,xiaomi/mimo-v2-pro-20260318,Mimo V2 Pro,xiaomi,3080000000000,1,1
+92,2026-04-06,2026-04-06T08:59:32.359887,4,qwen/qwen3.6-plus-preview:free,Qwen3.6 Plus Preview (free),qwen,1640000000000,1,1
+93,2026-04-06,2026-04-06T08:59:32.359887,5,stepfun/step-3.5-flash:free,Step 3.5 Flash (free),stepfun,1260000000000,1,1
+94,2026-04-06,2026-04-06T08:59:32.359887,6,minimax/minimax-m2.7-20260318,Minimax M2.7,minimax,1190000000000,1,1
+95,2026-04-06,2026-04-06T08:59:32.359887,7,deepseek/deepseek-v3.2-20251201,Deepseek V3.2,deepseek,1190000000000,1,1
+96,2026-04-06,2026-04-06T08:59:32.359887,8,anthropic/claude-4.6-sonnet-20260217,Claude Sonnet 4.6,anthropic,1030000000000,0,0
+97,2026-04-06,2026-04-06T08:59:32.359887,9,anthropic/claude-4.6-opus-20260205,Claude Opus 4.6,anthropic,1020000000000,0,0
+98,2026-04-06,2026-04-06T08:59:32.359887,10,google/gemini-3-flash-preview-20251217,Gemini 3 Flash Preview,google,980000000000,0,0
+99,2026-04-06,2026-04-06T08:59:32.359887,11,minimax/minimax-m2.5-20260211,Minimax M2.5,minimax,848000000000,1,1

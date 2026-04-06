@@ -1,0 +1,11 @@
+id,week_date,scraped_at,rank,app_url,app_name,token_count
+81,2026-04-06,2026-04-06T08:59:32.359887,1,https://openclaw.ai/,OpenClaw,677000000000
+82,2026-04-06,2026-04-06T08:59:32.359887,2,https://claude.ai/,Claude Code,214000000000
+83,2026-04-06,2026-04-06T08:59:32.359887,3,https://kilocode.ai/,Kilo Code,200000000000
+84,2026-04-06,2026-04-06T08:59:32.359887,4,https://hermes-agent.nousresearch.com/,Hermes Agent,143000000000
+85,2026-04-06,2026-04-06T08:59:32.359887,5,https://cline.bot/,Cline,40700000000
+86,2026-04-06,2026-04-06T08:59:32.359887,6,https://github.com/RooVetGit/Roo-Cline,Roo Code,30900000000
+87,2026-04-06,2026-04-06T08:59:32.359887,7,https://www.isekai.world/,ISEKAI ZERO,30900000000
+88,2026-04-06,2026-04-06T08:59:32.359887,8,https://janitorai.com/,Janitor AI,29400000000
+89,2026-04-06,2026-04-06T08:59:32.359887,9,https://descript.com/,Descript,26300000000
+90,2026-04-06,2026-04-06T08:59:32.359887,10,https://lemonade.gg/,Lemonade,9070000000
