@@ -1,0 +1,12 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+100,2026-04-13,2026-04-13T09:25:04.053105,1,labs/fusion,Fusion,labs,1660000000000,1,0
+101,2026-04-13,2026-04-13T09:25:04.053105,2,qwen/qwen3.6-plus-04-02:free,Qwen3.6 Plus (free),qwen,1660000000000,1,1
+102,2026-04-13,2026-04-13T09:25:04.053105,3,deepseek/deepseek-v3.2-20251201,Deepseek V3.2,deepseek,1270000000000,1,1
+103,2026-04-13,2026-04-13T09:25:04.053105,4,anthropic/claude-4.6-opus-20260205,Claude Opus 4.6,anthropic,1190000000000,0,0
+104,2026-04-13,2026-04-13T09:25:04.053105,5,minimax/minimax-m2.7-20260318,Minimax M2.7,minimax,1190000000000,1,1
+105,2026-04-13,2026-04-13T09:25:04.053105,6,anthropic/claude-4.6-sonnet-20260217,Claude Sonnet 4.6,anthropic,1160000000000,0,0
+106,2026-04-13,2026-04-13T09:25:04.053105,7,minimax/minimax-m2.5-20260211,Minimax M2.5,minimax,1100000000000,1,1
+107,2026-04-13,2026-04-13T09:25:04.053105,8,google/gemini-3-flash-preview-20251217,Gemini 3 Flash Preview,google,1060000000000,0,0
+108,2026-04-13,2026-04-13T09:25:04.053105,9,nvidia/nemotron-3-super-120b-a12b-20230311:free,Nemotron 3 Super 120B A12B (free),nvidia,659000000000,1,0
+109,2026-04-13,2026-04-13T09:25:04.053105,10,xiaomi/mimo-v2-pro-20260318,Mimo V2 Pro,xiaomi,606000000000,1,1
+110,2026-04-13,2026-04-13T09:25:04.053105,11,google/gemini-2.5-flash,Gemini 2.5 Flash,google,543000000000,0,0
