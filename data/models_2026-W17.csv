@@ -1,0 +1,12 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+111,2026-04-20,2026-04-20T09:46:51.528790,1,labs/fusion,Fusion,labs,1380000000000,1,0
+112,2026-04-20,2026-04-20T09:46:51.528790,2,anthropic/claude-4.6-sonnet-20260217,Claude Sonnet 4.6,anthropic,1380000000000,0,0
+113,2026-04-20,2026-04-20T09:46:51.528790,3,deepseek/deepseek-v3.2-20251201,Deepseek V3.2,deepseek,1280000000000,1,1
+114,2026-04-20,2026-04-20T09:46:51.528790,4,anthropic/claude-4.6-opus-20260205,Claude Opus 4.6,anthropic,1220000000000,0,0
+115,2026-04-20,2026-04-20T09:46:51.528790,5,xiaomi/mimo-v2-pro-20260318,Mimo V2 Pro,xiaomi,1150000000000,1,1
+116,2026-04-20,2026-04-20T09:46:51.528790,6,google/gemini-3-flash-preview-20251217,Gemini 3 Flash Preview,google,1140000000000,0,0
+117,2026-04-20,2026-04-20T09:46:51.528790,7,minimax/minimax-m2.5-20260211,Minimax M2.5,minimax,1050000000000,1,1
+118,2026-04-20,2026-04-20T09:46:51.528790,8,minimax/minimax-m2.7-20260318,Minimax M2.7,minimax,961000000000,1,1
+119,2026-04-20,2026-04-20T09:46:51.528790,9,google/gemini-2.5-flash-lite,Gemini 2.5 Flash Lite,google,595000000000,0,0
+120,2026-04-20,2026-04-20T09:46:51.528790,10,x-ai/grok-4.1-fast,Grok 4.1 Fast,x-ai,573000000000,0,0
+121,2026-04-20,2026-04-20T09:46:51.528790,11,google/gemini-2.5-flash,Gemini 2.5 Flash,google,567000000000,0,0
