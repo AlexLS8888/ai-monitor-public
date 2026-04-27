@@ -1,0 +1,12 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+122,2026-04-27,2026-04-27T10:04:05.891518,1,labs/fusion,Fusion,labs,1580000000000,1,0
+123,2026-04-27,2026-04-27T10:04:05.891518,2,moonshotai/kimi-k2.6-20260420,Kimi K2.6,moonshotai,1580000000000,1,1
+124,2026-04-27,2026-04-27T10:04:05.891518,3,anthropic/claude-4.6-sonnet-20260217,Claude Sonnet 4.6,anthropic,1360000000000,0,0
+125,2026-04-27,2026-04-27T10:04:05.891518,4,deepseek/deepseek-v3.2-20251201,Deepseek V3.2,deepseek,1280000000000,1,1
+126,2026-04-27,2026-04-27T10:04:05.891518,5,anthropic/claude-4.7-opus-20260416,Claude Opus 4.7,anthropic,1150000000000,0,0
+127,2026-04-27,2026-04-27T10:04:05.891518,6,google/gemini-3-flash-preview-20251217,Gemini 3 Flash Preview,google,1040000000000,0,0
+128,2026-04-27,2026-04-27T10:04:05.891518,7,minimax/minimax-m2.7-20260318,Minimax M2.7,minimax,790000000000,1,1
+129,2026-04-27,2026-04-27T10:04:05.891518,8,x-ai/grok-4.1-fast,Grok 4.1 Fast,x-ai,747000000000,0,0
+130,2026-04-27,2026-04-27T10:04:05.891518,9,stepfun/step-3.5-flash,Step 3.5 Flash,stepfun,721000000000,1,1
+131,2026-04-27,2026-04-27T10:04:05.891518,10,anthropic/claude-4.6-opus-20260205,Claude Opus 4.6,anthropic,685000000000,0,0
+132,2026-04-27,2026-04-27T10:04:05.891518,11,google/gemini-2.5-flash-lite,Gemini 2.5 Flash Lite,google,651000000000,0,0
