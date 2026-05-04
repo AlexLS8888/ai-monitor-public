@@ -1,0 +1,12 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+133,2026-05-04,2026-05-04T10:04:19.680917,1,labs/fusion,Fusion,labs,3030000000000,1,0
+134,2026-05-04,2026-05-04T10:04:19.680917,2,tencent/hy3-preview-20260421:free,Hy3 Preview (free),tencent,3030000000000,1,0
+135,2026-05-04,2026-05-04T10:04:19.680917,3,moonshotai/kimi-k2.6-20260420,Kimi K2.6,moonshotai,1820000000000,1,1
+136,2026-05-04,2026-05-04T10:04:19.680917,4,anthropic/claude-4.6-sonnet-20260217,Claude Sonnet 4.6,anthropic,1350000000000,0,0
+137,2026-05-04,2026-05-04T10:04:19.680917,5,google/gemini-3-flash-preview-20251217,Gemini 3 Flash Preview,google,973000000000,0,0
+138,2026-05-04,2026-05-04T10:04:19.680917,6,anthropic/claude-4.7-opus-20260416,Claude Opus 4.7,anthropic,935000000000,0,0
+139,2026-05-04,2026-05-04T10:04:19.680917,7,deepseek/deepseek-v3.2-20251201,Deepseek V3.2,deepseek,907000000000,1,1
+140,2026-05-04,2026-05-04T10:04:19.680917,8,stepfun/step-3.5-flash,Step 3.5 Flash,stepfun,752000000000,1,1
+141,2026-05-04,2026-05-04T10:04:19.680917,9,minimax/minimax-m2.7-20260318,Minimax M2.7,minimax,729000000000,1,1
+142,2026-05-04,2026-05-04T10:04:19.680917,10,deepseek/deepseek-v4-flash-20260423,Deepseek V4 Flash,deepseek,704000000000,1,1
+143,2026-05-04,2026-05-04T10:04:19.680917,11,x-ai/grok-4.1-fast,Grok 4.1 Fast,x-ai,646000000000,0,0
