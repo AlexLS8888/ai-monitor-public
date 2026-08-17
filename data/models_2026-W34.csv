@@ -1,0 +1,11 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+144,2026-05-11,2026-05-11T10:51:21.787024,1,tencent/hy3-preview-20260421:free,Hy3 Preview (free),tencent,2680000000000,1,0
+145,2026-05-11,2026-05-11T10:51:21.787024,2,moonshotai/kimi-k2.6-20260420,Kimi K2.6,moonshotai,1610000000000,1,1
+146,2026-05-11,2026-05-11T10:51:21.787024,3,anthropic/claude-4.6-sonnet-20260217,Claude Sonnet 4.6,anthropic,1450000000000,0,0
+147,2026-05-11,2026-05-11T10:51:21.787024,4,anthropic/claude-4.7-opus-20260416,Claude Opus 4.7,anthropic,1240000000000,0,0
+148,2026-05-11,2026-05-11T10:51:21.787024,5,deepseek/deepseek-v4-flash-20260423,Deepseek V4 Flash,deepseek,1110000000000,1,1
+149,2026-05-11,2026-05-11T10:51:21.787024,6,google/gemini-3-flash-preview-20251217,Gemini 3 Flash Preview,google,1070000000000,0,0
+150,2026-05-11,2026-05-11T10:51:21.787024,7,deepseek/deepseek-v3.2-20251201,Deepseek V3.2,deepseek,868000000000,1,1
+151,2026-05-11,2026-05-11T10:51:21.787024,8,tencent/hy3-preview-20260421,Hy3 Preview,tencent,857000000000,1,0
+152,2026-05-11,2026-05-11T10:51:21.787024,9,deepseek/deepseek-v4-pro-20260423,Deepseek V4 Pro,deepseek,816000000000,1,1
+153,2026-05-11,2026-05-11T10:51:21.787024,10,minimax/minimax-m2.7-20260318,Minimax M2.7,minimax,745000000000,1,1
