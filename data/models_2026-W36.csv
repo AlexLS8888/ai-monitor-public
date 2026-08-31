@@ -1,0 +1,11 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+164,2026-08-31,2026-08-31T15:35:28.067090,1,stealth/ox-alpha,Ox Alpha,stealth,15700000000000,1,0
+165,2026-08-31,2026-08-31T15:35:28.067090,2,deepseek/deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,deepseek,12300000000000,1,1
+166,2026-08-31,2026-08-31T15:35:28.067090,3,xiaomi/mimo-v2.5,MiMo-V2.5,xiaomi,9140000000000,1,1
+167,2026-08-31,2026-08-31T15:35:28.067090,4,openai/gpt-5.6-luna,GPT-5.6 Luna,openai,7790000000000,0,0
+168,2026-08-31,2026-08-31T15:35:28.067090,5,tencent/hy3,Hy3,tencent,6660000000000,1,0
+169,2026-08-31,2026-08-31T15:35:28.067090,6,z-ai/glm-5.3-flash,GLM 5.3 Flash,z-ai,6160000000000,1,0
+170,2026-08-31,2026-08-31T15:35:28.067090,7,nvidia/nemotron-3-ultra-550b-a55b:free,Nemotron 3 Ultra (free),nvidia,5330000000000,1,0
+171,2026-08-31,2026-08-31T15:35:28.067090,8,deepseek/deepseek-v4-flash,DeepSeek V4 Flash 0423,deepseek,5200000000000,1,1
+172,2026-08-31,2026-08-31T15:35:28.067090,9,google/gemini-3.7-flash,Gemini 3.7 Flash,google,3950000000000,0,0
+173,2026-08-31,2026-08-31T15:35:28.067090,10,tencent/hy4-preview,Hy4 preview,tencent,3070000000000,1,0
