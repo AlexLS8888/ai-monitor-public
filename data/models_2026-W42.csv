@@ -1,0 +1,12 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+225,2026-10-12,2026-10-12T17:04:58.985292,1,workspaces/default,Dashboard,workspaces,1590000000000,1,0
+226,2026-10-12,2026-10-12T17:04:58.985292,2,deepseek/deepseek-v4.1-flash,DeepSeek V4.1 Flash,deepseek,41000000000000,1,1
+227,2026-10-12,2026-10-12T17:04:58.985292,3,z-ai/glm-5.3-flash,GLM 5.3 Flash,z-ai,12200000000000,1,0
+228,2026-10-12,2026-10-12T17:04:58.985292,4,xiaomi/mimo-v2.6-flash,MiMo-V2.6-Flash,xiaomi,11500000000000,1,1
+229,2026-10-12,2026-10-12T17:04:58.985292,5,stepfun/step-5-preview,Step 5 Preview,stepfun,8840000000000,1,1
+230,2026-10-12,2026-10-12T17:04:58.985292,6,tencent/hy4-preview,Hy4 preview,tencent,8279999999999,1,0
+231,2026-10-12,2026-10-12T17:04:58.985292,7,openai/gpt-6-luna,GPT-6 Luna,openai,7080000000000,0,0
+232,2026-10-12,2026-10-12T17:04:58.985292,8,nvidia/nemotron-3-ultra-550b-a55b:free,Nemotron 3 Ultra (free),nvidia,6870000000000,1,0
+233,2026-10-12,2026-10-12T17:04:58.985292,9,anthropic/claude-opus-5.5,Claude Opus 5.5,anthropic,5020000000000,0,0
+234,2026-10-12,2026-10-12T17:04:58.985292,10,deepseek/deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,deepseek,4920000000000,1,1
+235,2026-10-12,2026-10-12T17:04:58.985292,11,stealth/space-bunny-alpha,Space Bunny Alpha,stealth,4200000000000,1,0
