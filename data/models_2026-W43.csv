@@ -1,0 +1,13 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+236,2026-10-19,2026-10-19T15:04:26.776884,1,workspaces/default,Dashboard,workspaces,1390000000000,1,0
+237,2026-10-19,2026-10-19T15:04:26.776884,2,business/eu,EU routing,business,1390000000000,1,0
+238,2026-10-19,2026-10-19T15:04:26.776884,3,deepseek/deepseek-v4.1-flash,DeepSeek V4.1 Flash,deepseek,32799999999999,1,1
+239,2026-10-19,2026-10-19T15:04:26.776884,4,z-ai/glm-5.3-flash,GLM 5.3 Flash,z-ai,12200000000000,1,0
+240,2026-10-19,2026-10-19T15:04:26.776884,5,stepfun/step-5-preview,Step 5 Preview,stepfun,11500000000000,1,1
+241,2026-10-19,2026-10-19T15:04:26.776884,6,xiaomi/mimo-v2.6-flash,MiMo-V2.6-Flash,xiaomi,9940000000000,1,1
+242,2026-10-19,2026-10-19T15:04:26.776884,7,tencent/hy4-preview,Hy4 preview,tencent,7550000000000,1,0
+243,2026-10-19,2026-10-19T15:04:26.776884,8,openai/gpt-6-luna,GPT-6 Luna,openai,6210000000000,0,0
+244,2026-10-19,2026-10-19T15:04:26.776884,9,anthropic/claude-opus-5.5,Claude Opus 5.5,anthropic,6180000000000,0,0
+245,2026-10-19,2026-10-19T15:04:26.776884,10,z-ai/glm-5.3,GLM 5.3,z-ai,5190000000000,1,0
+246,2026-10-19,2026-10-19T15:04:26.776884,11,nvidia/nemotron-3-ultra-550b-a55b:free,Nemotron 3 Ultra (free),nvidia,4970000000000,1,0
+247,2026-10-19,2026-10-19T15:04:26.776884,12,deepseek/deepseek-v4-flash-0731,DeepSeek V4 Flash 0731,deepseek,4700000000000,1,1
