@@ -1,0 +1,13 @@
+id,week_date,scraped_at,rank,model_id,model_name,provider,token_count,is_open_source,is_chinese
+248,2026-10-26,2026-10-26T14:37:42.273495,1,workspaces/default,Dashboard,workspaces,1660000000000,1,0
+249,2026-10-26,2026-10-26T14:37:42.273495,2,business/eu,EU routing,business,1660000000000,1,0
+250,2026-10-26,2026-10-26T14:37:42.273495,3,deepseek/deepseek-v4.1-flash-1017,DeepSeek V4.1 Flash 1017,deepseek,33600000000000,1,1
+251,2026-10-26,2026-10-26T14:37:42.273495,4,deepseek/deepseek-v4.1-flash,DeepSeek V4.1 Flash,deepseek,18000000000000,1,1
+252,2026-10-26,2026-10-26T14:37:42.273495,5,minimax/minimax-m3.1-flash:free,MiniMax M3.1 Flash (free),minimax,13700000000000,1,1
+253,2026-10-26,2026-10-26T14:37:42.273495,6,z-ai/glm-5.3-flash,GLM 5.3 Flash,z-ai,13200000000000,1,0
+254,2026-10-26,2026-10-26T14:37:42.273495,7,tencent/hy4-preview,Hy4 preview,tencent,8970000000000,1,0
+255,2026-10-26,2026-10-26T14:37:42.273495,8,openai/gpt-6-luna,GPT-6 Luna,openai,8350000000000,0,0
+256,2026-10-26,2026-10-26T14:37:42.273495,9,anthropic/claude-opus-5.5,Claude Opus 5.5,anthropic,8270000000000,0,0
+257,2026-10-26,2026-10-26T14:37:42.273495,10,xiaomi/mimo-v2.6-flash,MiMo-V2.6-Flash,xiaomi,6070000000000,1,1
+258,2026-10-26,2026-10-26T14:37:42.273495,11,nvidia/nemotron-3-ultra-550b-a55b:free,Nemotron 3 Ultra (free),nvidia,5850000000000,1,0
+259,2026-10-26,2026-10-26T14:37:42.273495,12,z-ai/glm-5.3,GLM 5.3,z-ai,5050000000000,1,0
